@@ -3,29 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TRE 1 - Aulas Realizadas</title>
+  <title>TRE-1 | Polícia RCC - Relatório dos Treinadores 1  </title>
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  
+  <!-- Open Graph (Facebook, WhatsApp, LinkedIn, etc.) -->
+  <meta property="og:title" content="TRE-1 | Polícia RCC - Relatório dos Treinadores 1">
+  <meta property="og:description" content="Acompanhe o ranking semanal de aulas e metas da TRE-1.">
+  <meta property="og:image" content="https://motadeveloper.github.io/TRE1-RCC/assets/img/Logo.png">
+  <meta property="og:url" content="https://motadeveloper.github.io/TRE1-RCC/">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TRE-1 | Polícia RCC - Relatório dos Treinadores 1">
+  <meta name="twitter:description" content="Acompanhe o ranking semanal de aulas e metas da TRE-1.">
+  <meta name="twitter:image" content="https://motadeveloper.github.io/TRE1-RCC/assets/img/Logo.png">
+
+  <link rel="stylesheet" href="assets/css/header.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/style2.css">
   <link rel="stylesheet" href="assets/css/Listameta.css">
+
 </head>
-<br>
 
-  <div class="background"></div>
+<div class="header">
+    <div class="logo">
+      <img src="https://www.habbo.com.br/habbo-imaging/badge/b09104s43131s50134s17113s17115a051fdde00b85d5ec8603e4f87cff210.gif" alt="Logo TRE-1">
+      <span>TRE-1</span>
+    </div>
 
-  <br class="container">
-    <header class="header">
-      <h1><img 
-  src="https://www.habbo.com.br/habbo-imaging/badge/b09104s43131s50134s17113s17115a051fdde00b85d5ec8603e4f87cff210.gif"
-  alt="Badge Habbo"
-  width="64"
-  height="64"> TREINADORES <img 
-  src="https://www.habbo.com.br/habbo-imaging/badge/b09104s43131s50134s17113s17115a051fdde00b85d5ec8603e4f87cff210.gif"
-  alt="Badge Habbo"
-  width="64"
-  height="64"></h1>
-      <p>Relatório de Treinamento Básico</p>
-    </header>
+    <div class="counter" id="counter">
+      <span id="time">#TRE</span>
+    </div>
+
+    <div class="menu-btn" id="menuBtn">
+      <div class="bar"></div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="sidebar">
+    <h2>Menu</h2>
+    <ul>
   </br>
+      <li><span>Início</span></li>
+      <li><span>Ranking</span></li>
+      <li><span>Histórico de aulas</span></li>
+      <li><span>Fora da Meta</span></li>
+    </ul>
+  </div>
+</br>
+</br>
+<main>
+<h1>Ranking</h1>
 <div class="ranking-body">
 
     <!-- LADO ESQUERDO - RANKING -->
@@ -97,6 +127,7 @@
 
   </main>
 <footer></footer>
+<script src="services/headerMenu.js"></script>
 <script src="services/dadosPlanilha.js"></script>
 <script src="services/Listaaulas.js"></script>
 <script src="services/ListarRankingTreinadores.js"></script>

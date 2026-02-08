@@ -1,0 +1,224 @@
+ :root {
+    --bg: #0b1020;
+    --card: rgba(255, 255, 255, 0.06);
+    --border: rgba(255, 255, 255, 0.12);
+    --text: #e8e8ff;
+    --accent: #7c3aed;
+    --accent2: #22c55e;
+    --alert: #ff3b3b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #070a14, #0b1020);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* =========================
+   VARIÁVEIS LOCAIS (sem :root)
+   ========================= */
+.header {
+  --bg: #1b0a0f;
+  --card: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.14);
+  --text: #e6e6e6;
+  --accent: #b65bff;
+  --accent2: #ff2d2d;
+  --alert: #ffd500;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background: rgba(15, 6, 10, 0.85);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #070407, #1b0a0f);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* HEADER */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+}
+
+.logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 2px solid var(--accent);
+  animation: glow 2.5s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 12px rgba(182, 91, 255, 0.9); }
+  50% { box-shadow: 0 0 18px rgba(255, 45, 45, 0.9); }
+}
+
+.logo span {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(182, 91, 255, 0.7);
+  color: var(--text);
+  white-space: nowrap;
+}
+
+/* COUNTER */
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: none;
+  box-shadow: none;
+}
+
+.counter span {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: var(--text);
+}
+
+/* ALERT COLOR */
+.counter.alert span {
+  color: var(--alert);
+  animation: bounce 1.2s ease-in-out infinite;
+}
+
+/* ANIMAÇÃO DE PULINHO */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* MENU BUTTON */
+.menu-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.menu-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(182, 91, 255, 0.22);
+  border-color: var(--accent);
+}
+
+.menu-btn .bar {
+  width: 22px;
+  height: 2px;
+  background: #fff;
+  position: relative;
+}
+
+.menu-btn .bar::before,
+.menu-btn .bar::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 2px;
+  background: #fff;
+  left: 0;
+}
+
+.menu-btn .bar::before { top: -7px; }
+.menu-btn .bar::after { top: 7px; }
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 320px;
+  height: 100vh;
+  background: linear-gradient(180deg, #2c0f18, #12060a);
+  border-right: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  padding: 20px;
+  transform: translateX(-320px);
+  transition: transform 0.4s ease;
+  z-index: 999;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text);
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar li {
+  margin: 16px 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition: 0.3s;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.sidebar li:hover {
+  background: rgba(182, 91, 255, 0.18);
+  border-color: rgba(182, 91, 255, 0.4);
+}
+
+.sidebar li span {
+  font-size: 16px;
+  color: var(--text);
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 900px) {
+  .logo span { font-size: 18px; }
+  .counter span { font-size: 14px; }
+  .sidebar { width: 280px; }
+  .content.shift { transform: translateX(280px); }
+}
+
+@media (max-width: 600px) {
+  .header { padding: 0 12px; }
+  .logo img { width: 36px; height: 36px; }
+  .logo span { font-size: 15px; }
+  .counter span { font-size: 13px; }
+  .menu-btn { width: 46px; height: 46px; }
+
+  .sidebar { width: 240px; }
+  .content.shift { transform: translateX(240px); }
+}
