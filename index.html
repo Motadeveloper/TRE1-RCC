@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TRE 1 - Aulas Realizadas</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/style2.css">
+  <link rel="stylesheet" href="/assets/css/Listameta.css">
 </head>
 <br>
 
@@ -24,28 +26,26 @@
       <p>Relatório de Treinamento Básico</p>
     </header>
   </br>
-    <div class="ranking-body">
+<div class="ranking-body">
 
     <!-- LADO ESQUERDO - RANKING -->
     <div class="ranking-list" id="rankingList">
-      <!-- ranking será gerado pelo JS -->
-    </div>
+    <!-- ranking será gerado pelo JS -->
+  </div>
 
     <!-- LADO DIREITO - PESQUISA / ESTATÍSTICAS -->
     <div class="ranking-side">
-      <h2>Pesquisar Treinador</h2>
-      
-      <input type="text" id="inputPesquisa" placeholder="Digite o nickname..." />
+  <h2>Pesquisar Treinador</h2>
+  <input type="text" id="inputPesquisa" placeholder="Digite o nickname..." />
 
-      <div class="pesquisa-resultado" id="pesquisaResultado" style="display:none;">
-        <div class="avatar" id="avatarPesquisa"></div>
-        <h3 id="nickPesquisa"></h3>
-        <p id="aulasPesquisa"></p>
-        <p id="pontosPesquisa"></p>
-        <div class="meta-alert" id="metaAlert"></div>
-      </div>
-
-    </div>
+  <div class="pesquisa-resultado" id="pesquisaResultado" style="display:none;">
+    <div class="avatar" id="avatarPesquisa"></div>
+    <h3 id="nickPesquisa"></h3>
+    <p id="aulasPesquisa"></p>
+    <p id="pontosPesquisa"></p>
+    <div class="meta-alert" id="metaAlert"></div>
+  </div>
+</div>
   </div>
 </br>
   <!-- CARDS DE ESTATÍSTICAS GERAIS -->
@@ -67,71 +67,47 @@
 </div>
 </br>
 
-
-    <!-- FILTROS (visual por enquanto) -->
-    <section class="filters">
-
-      <select id="filtroCurso">
-      <option value="">Curso</option>
-      <option value="cas">CAS</option>
-      <option value="cfs">CFS</option>
-    </select>
-      <select id="filtroResultado">
-        <option value="">Resultados</option>
-        <option value="aprovado">Aprovado</option>
-        <option value="reprovado">Reprovado</option>
-        <option value="caiu">Caiu</option>
-      </select>
-
-      <input type="text" id="busca" placeholder="Buscar por treinador ou aluno">
-      <button class="btn-clear" id="clearBtn">Limpar</button>
-  
-    </section>
-
-    <div id="sem-registro" class="alerta-sem-registro" style="display:none;">
-    ⚠️ Sem registro na planilha!</div>
-    </br>
+<div class="container">
+  <h1>Histórico de Aulas</h1>
+  <!-- LOADER -->
+  <div id="loader" class="loader">
+    <div class="habbo-loader">
+      <div class="pixel"></div>
+      <div class="pixel"></div>
+      <div class="pixel"></div>
+      <div class="pixel"></div>
+      <div class="pixel"></div>
+      <div class="pixel"></div>
     </div>
+    <div class="loader-text">Carregando aulas...</div>
+  </div>
+
+  <!-- LISTA -->
+  <div id="lessons" class="lessons"></div>
+
+  <!-- PAGINAÇÃO -->
+  <div class="pagination">
+    <button onclick="prevPage()">‹</button>
+    <span id="pageInfo"></span>
+    <button onclick="nextPage()">›</button>
+  </div>
+</div>
 
 
-    <section class="table-wrapper">
-      
-
-      <table>
-        
-        <thead>
-          <tr>
-            <th>Data/Hora</th>
-            <th>Treinador</th>
-            <th>Curso</th>
-            <th>Início</th>
-            <th>Término</th>
-            <th>Duração</th>
-            <th>Local</th>
-            <th>Aluno</th>
-            <th>Resultado</th>
-          </tr>
-        </thead>
-        <tbody id="tabela-aulas">
-          <!-- Dados entram aqui via JS -->
-        </tbody>
-        </table>
-      </table>
-    </section>
-  </br>
-    </br>
 
   </main>
 <footer></footer>
-
+<script src="services/dadosPlanilha.js"></script>
+<script src="services/Listaaulas.js"></script>
+<script src="services/ListarRankingTreinadores.js"></script>
+<script src="services/Listarmeta.js"></script>
 <script src="services/Formatardata.js"></script>
-<script src="services/Listardados.js"></script>
 <script src="services/Buscardados.js"></script>
 <script src="services/Filtroresultado.js"></script>
 <script src="services/Filtrocurso.js"></script>
 <script src="services/Clearbtn.js"></script>
-<script src="services/ListarRankingTreinadores.js"></script>
-<script src="services/Listarmeta.js"></script>
+
+
 
 
 

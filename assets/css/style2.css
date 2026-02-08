@@ -1,0 +1,250 @@
+* {
+  box-sizing: border-box;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 24px;
+  background: #050505;
+  color: #fff;
+}
+
+.container {
+  max-width: 960px;
+  margin: auto;
+}
+
+h1 {
+  margin-bottom: 24px;
+}
+
+/* ===========================
+   LOADER (Habbo Style)
+=========================== */
+
+#loader {
+  display: none; /* fica escondido por padrão */
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 14px;
+}
+
+.habbo-loader {
+  display: grid;
+  grid-template-columns: repeat(6, 14px);
+  grid-gap: 4px;
+}
+
+.pixel {
+  width: 14px;
+  height: 14px;
+  background: #0ff;
+  border: 1px solid rgba(0, 255, 255, 0.6);
+  animation: pixelPulse 1s infinite;
+}
+
+.pixel:nth-child(2) { animation-delay: 0.1s; }
+.pixel:nth-child(3) { animation-delay: 0.2s; }
+.pixel:nth-child(4) { animation-delay: 0.3s; }
+.pixel:nth-child(5) { animation-delay: 0.4s; }
+.pixel:nth-child(6) { animation-delay: 0.5s; }
+
+@keyframes pixelPulse {
+  0%, 100% { transform: scale(1); opacity: .6; }
+  50% { transform: scale(1.4); opacity: 1; }
+}
+
+.loader-text {
+  font-size: 14px;
+  color: #a8f2ff;
+}
+
+/* ===========================
+   FIM LOADER
+=========================== */
+
+/* Card */
+.lesson {
+  background: linear-gradient(180deg, #0f0f0f, #090909);
+  border-radius: 14px;
+  margin-bottom: 14px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.05);
+  animation: fadeUp 0.4s ease;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Summary */
+summary {
+  list-style: none;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 20px;
+  padding: 18px 20px;
+  align-items: center;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Avatares */
+.person {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.person img {
+  width: 48px;
+  height: 48px;
+  background: #111;
+  border-radius: 50%;
+}
+
+.person .info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.role {
+  font-size: 12px;
+  letter-spacing: .08em;
+  opacity: .7;
+  color: white;
+}
+
+/* Resumo */
+.resume {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.resume .type {
+  font-weight: 600;
+}
+
+.resume .datetime {
+  font-size: 13px;
+  color: #aaa;
+}
+
+/* Status */
+.right {
+  text-align: right;
+}
+
+.duration {
+  font-size: 13px;
+  color: #bbb;
+}
+
+.badge {
+  margin-top: 6px;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.aprovado { background: #0f5132; color: #2ecc71; }
+.reprovado { background: #3a0d0d; color: #ff4d4d; }
+.caiu { background: #3a2a00; color: #f1c40f; }
+
+/* Conteúdo interno */
+.content {
+  padding: 22px;
+  background: #080808;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  animation: expand 0.3s ease;
+}
+
+@keyframes expand {
+  from { opacity: 0; transform: scaleY(.95); }
+  to { opacity: 1; transform: scaleY(1); }
+}
+
+.block {
+  background: #111;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.block strong {
+  display: block;
+  font-size: 12px;
+  opacity: .7;
+  margin-bottom: 4px;
+}
+
+.comment {
+  grid-column: 1 / -1;
+  border-left: 4px solid #333;
+  color: white;
+}
+
+/* Paginação */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.pagination button {
+  background: #111;
+  border: none;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.pagination span {
+  opacity: .7;
+}
+
+/* Mobile */
+@media (max-width: 720px) {
+  summary {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+  }
+
+  .right {
+    text-align: left;
+  }
+
+
+}

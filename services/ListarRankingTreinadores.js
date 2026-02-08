@@ -1,15 +1,18 @@
-document.addEventListener("dadosPlanilhaProntos", (e) => {
+document.addEventListener("planilhaPronta", (e) => {
   montarRanking(e.detail);
 });
 
 function montarRanking(dados) {
+  if (!Array.isArray(dados)) return;
+
   const mapa = {};
 
-  // Monta o mapa de treinadores
   dados.forEach(item => {
-    const treinador = item.treinador.trim();
-    const curso = item.curso.trim().toUpperCase();
-    if (!treinador || !curso) return;
+    const treinador = (item.treinador || "").trim();
+    const curso = (item.curso || "").trim().toUpperCase();
+
+    if (!treinador) return;
+    if (!curso) return;
 
     if (!mapa[treinador]) {
       mapa[treinador] = { nick: treinador, aulas: 0, pontos: 0 };
@@ -21,10 +24,9 @@ function montarRanking(dados) {
     if (curso === "CAS") mapa[treinador].pontos += 40;
   });
 
-  // Ordena do maior para o menor
   const ranking = Object.values(mapa)
     .sort((a, b) => b.pontos - a.pontos)
-    .slice(0, 5); // pega top 5
+    .slice(0, 5);
 
   const rankingList = document.getElementById("rankingList");
   if (!rankingList) return;
@@ -32,7 +34,6 @@ function montarRanking(dados) {
   rankingList.innerHTML = "";
 
   ranking.forEach((t, index) => {
-    // Define classe de cor
     let classe = "";
     if (index === 0) classe = "gold";
     if (index === 1) classe = "silver";
@@ -52,4 +53,20 @@ function montarRanking(dados) {
       </div>
     `;
   });
+
+  // ==============================
+  // 🔥 AQUI: pega o primeiro lugar
+  // ==============================
+  const primeiro = ranking[0];
+  if (primeiro) {
+    requestAnimationFrame(() => {
+      const inputPesquisa = document.getElementById("inputPesquisa");
+      if (inputPesquisa) {
+        inputPesquisa.value = primeiro.nick;
+
+        // ⚡ Dispara a pesquisa automaticamente
+        inputPesquisa.dispatchEvent(new Event("input"));
+      }
+    });
+  }
 }
