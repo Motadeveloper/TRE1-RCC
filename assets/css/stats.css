@@ -1,0 +1,47 @@
+.stats {
+  display: flex;
+  justify-content: space-between;
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 24px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.stats.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stat {
+  text-align: center;
+  color: #fff;
+}
+
+.number {
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 64px;
+  font-weight: 600;
+  letter-spacing: -2px;
+  display: block;
+}
+
+.label {
+  font-size: 18px;
+  opacity: 0.6;
+  margin-top: 6px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .stats {
+    flex-direction: column;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .number {
+    font-size: 56px;
+  }
+}

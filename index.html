@@ -23,6 +23,8 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/style2.css">
   <link rel="stylesheet" href="assets/css/Listameta.css">
+    <link rel="stylesheet" href="assets/css/stats.css">
+
 
 </head>
 
@@ -78,22 +80,22 @@
 </div>
   </div>
 </br>
-  <!-- CARDS DE ESTATÍSTICAS GERAIS -->
-  <div class="cards-estatisticas-gerais">
-    <div class="card pixel-card">
-      <h3>Total de Aulas</h3>
-      <p id="totalAulasNum">0</p>
-    </div>
-    <div class="card pixel-card">
-      <h3>Total Aprovados</h3>
-      <p id="totalAprovadosNum">0</p>
-    </div>
-    <div class="card pixel-card">
-      <h3>Total Reprovados</h3>
-      <p id="totalReprovadosNum">0</p>
-    </div>
+ <section class="stats">
+  <div class="stat">
+    <span class="number" data-key="aulas">0</span>
+    <span class="label">Aulas</span>
   </div>
 
+  <div class="stat">
+    <span class="number" data-key="aprovados">0</span>
+    <span class="label">Aprovados</span>
+  </div>
+
+  <div class="stat">
+    <span class="number" data-key="reprovados">0</span>
+    <span class="label">Reprovados</span>
+  </div>
+</section>
 </div>
 </br>
 
@@ -137,6 +139,7 @@
 <script src="services/Filtroresultado.js"></script>
 <script src="services/Filtrocurso.js"></script>
 <script src="services/Clearbtn.js"></script>
+<script src="services/stats.js"></script>
 
 
 
