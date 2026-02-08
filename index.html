@@ -23,7 +23,9 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/style2.css">
   <link rel="stylesheet" href="assets/css/Listameta.css">
-    <link rel="stylesheet" href="assets/css/stats.css">
+  <link rel="stylesheet" href="assets/css/stats.css">
+  <link rel="stylesheet" href="assets/css/filtros.css">
+
 
 
 </head>
@@ -100,7 +102,68 @@
 </br>
 
 <div class="container">
-  <h1>Histórico de Aulas</h1>
+<h1>Histórico de Aulas</h1>
+<div class="filtros-container">
+
+  <!-- Busca permanece igual -->
+  <div class="busca-container">
+    <input type="text" id="busca" placeholder="Buscar por treinador ou aluno" />
+    <button class="btn-clear" title="Limpar filtros">✕</button>
+  </div>
+
+  <!-- Desktop: filtros por botões -->
+  <div class="filtros-desktop">
+
+    <!-- Resultado -->
+    <div class="filtro-grupo">
+      <span class="filtro-titulo">Resultado</span>
+      <div class="filtro-botoes" data-filtro="resultado">
+        <button class="btn-filtro resultado aprovado" data-valor="aprovado">Aprovado</button>
+        <button class="btn-filtro resultado caiu" data-valor="caiu">Caiu</button>
+        <button class="btn-filtro resultado reprovado" data-valor="reprovado">Reprovado</button>
+      </div>
+    </div>
+
+    <!-- Curso -->
+    <div class="filtro-grupo">
+      <span class="filtro-titulo">Curso</span>
+      <div class="filtro-botoes" data-filtro="curso">
+        <button class="btn-filtro curso" data-valor="cfs">CFS</button>
+        <button class="btn-filtro curso" data-valor="cas">CAS</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Mobile: filtros por selects -->
+  <div class="filtros-mobile">
+
+    <!-- Resultado -->
+    <div class="filtro-grupo">
+      <label for="selectResultado" class="filtro-titulo">Resultado</label>
+      <select id="selectResultado">
+        <option value="">Todos</option>
+        <option value="aprovado">Aprovado</option>
+        <option value="caiu">Caiu</option>
+        <option value="reprovado">Reprovado</option>
+      </select>
+    </div>
+
+    <!-- Curso -->
+    <div class="filtro-grupo">
+      <label for="selectCurso" class="filtro-titulo">Curso</label>
+      <select id="selectCurso">
+        <option value="">Todos</option>
+        <option value="cfs">CFS</option>
+        <option value="cas">CAS</option>
+      </select>
+    </div>
+
+  </div>
+
+</div>
+  
+
   <!-- LOADER -->
   <div id="loader" class="loader">
     <div class="habbo-loader">
@@ -135,10 +198,6 @@
 <script src="services/ListarRankingTreinadores.js"></script>
 <script src="services/Listarmeta.js"></script>
 <script src="services/Formatardata.js"></script>
-<script src="services/Buscardados.js"></script>
-<script src="services/Filtroresultado.js"></script>
-<script src="services/Filtrocurso.js"></script>
-<script src="services/Clearbtn.js"></script>
 <script src="services/stats.js"></script>
 
 

@@ -47,19 +47,24 @@ document.addEventListener("planilhaPronta", (e) => {
   }));
 
   paginaAtual = 1;
-  renderFAQ();
-  atualizarPaginacao();
+  renderFAQ(dadosOriginais);
+  atualizarPaginacao(dadosOriginais);
   hideLoader();
 });
 
-function renderFAQ() {
+/* =====================================================
+   RENDERIZAÇÃO DA TABELA
+   ===================================================== */
+function renderFAQ(dados = dadosOriginais) {
   const container = document.getElementById("lessons");
   container.innerHTML = "";
 
   const inicio = (paginaAtual - 1) * itensPorPagina;
   const fim = inicio + itensPorPagina;
 
-  dadosOriginais.slice(inicio, fim).forEach(item => {
+  const dadosParaRender = dados.slice(inicio, fim);
+
+  dadosParaRender.forEach(item => {
     let statusClass = "reprovado";
     const resultado = (item.resultado || "").toLowerCase();
 
@@ -108,35 +113,40 @@ function renderFAQ() {
       </details>
     `;
   });
+
+  atualizarPaginacao(dados);
 }
 
-function atualizarPaginacao() {
-  const totalPaginas = Math.ceil(dadosOriginais.length / itensPorPagina);
+/* =====================================================
+   PAGINAÇÃO
+   ===================================================== */
+function atualizarPaginacao(dados = dadosOriginais) {
+  const totalPaginas = Math.ceil(dados.length / itensPorPagina);
   document.getElementById("pageInfo").innerText =
     `Página ${paginaAtual} de ${totalPaginas}`;
 }
 
-function nextPage() {
-  const totalPaginas = Math.ceil(dadosOriginais.length / itensPorPagina);
+function nextPage(dados = dadosOriginais) {
+  const totalPaginas = Math.ceil(dados.length / itensPorPagina);
   if (paginaAtual < totalPaginas) {
     paginaAtual++;
     showLoader();
     setTimeout(() => {
-      renderFAQ();
-      atualizarPaginacao();
+      renderFAQ(dados);
+      atualizarPaginacao(dados);
       hideLoader();
-    }, 500);
+    }, 300);
   }
 }
 
-function prevPage() {
+function prevPage(dados = dadosOriginais) {
   if (paginaAtual > 1) {
     paginaAtual--;
     showLoader();
     setTimeout(() => {
-      renderFAQ();
-      atualizarPaginacao();
+      renderFAQ(dados);
+      atualizarPaginacao(dados);
       hideLoader();
-    }, 500);
+    }, 300);
   }
 }
