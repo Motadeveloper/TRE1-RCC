@@ -15,19 +15,47 @@ function carregarPlanilha() {
 
       window.dadosPlanilha = rows
         .filter(r => r.c)
-        .map(r => ({
-          dataHora: r.c[1]?.v || "",
-          treinador: r.c[2]?.v || "",
-          curso: r.c[3]?.v || "",
-          inicio: r.c[4]?.v || "",
-          termino: r.c[5]?.v || "",
-          duracao: r.c[6]?.v || "",
-          aluno: r.c[8]?.v || "",
-          local: r.c[7]?.v || "",
-          resultado: r.c[9]?.v || "",
-          comentario: r.c[13]?.v || "-x-",
-          tutoria: r.c[12]?.v || ""
-        }));
+        .map(r => {
+          const alunosRaw = (r.c[8]?.v || "")
+            .split("/")
+            .map(a => a.trim())
+            .filter(Boolean);
+
+          // status individuais
+          const status1 = r.c[9]?.v || "";
+          const status2 = r.c[10]?.v || "";
+          const status3 = r.c[11]?.v || "";
+
+          // cria array de alunos com status
+          const alunos = alunosRaw.map((nome, index) => {
+            const status = index === 0 ? status1 :
+                           index === 1 ? status2 :
+                           index === 2 ? status3 : "";
+
+            return { nome, status };
+          });
+
+          return {
+            dataHora: r.c[1]?.v || "",
+            treinador: r.c[2]?.v || "",
+            curso: r.c[3]?.v || "",
+            inicio: r.c[4]?.v || "",
+            termino: r.c[5]?.v || "",
+            duracao: r.c[6]?.v || "",
+            local: r.c[7]?.v || "",
+
+            // mantém o campo original (para compatibilidade)
+            aluno: r.c[8]?.v || "",
+
+            // array com alunos + status
+            alunos,
+
+            // campo geral (mantido)
+            resultado: r.c[9]?.v || "",
+            comentario: r.c[13]?.v || "-x-",
+            tutoria: r.c[12]?.v || ""
+          };
+        });
 
       // 🔥 DISPARA O EVENTO APENAS DEPOIS DE PREENCHER OS DADOS
       document.dispatchEvent(

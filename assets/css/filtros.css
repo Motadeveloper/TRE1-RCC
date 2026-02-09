@@ -227,3 +227,23 @@
     min-width: 180px;
   }
 }
+
+
+/* Evita zoom e scroll lateral no mobile */
+input,
+select,
+textarea {
+  font-size: 16px;
+}
+
+/* Garante que nada estoure horizontalmente */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Ajuste específico da busca */
+.busca-container input {
+  width: 100%;
+  box-sizing: border-box;
+}
