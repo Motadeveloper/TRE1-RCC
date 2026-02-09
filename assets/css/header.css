@@ -213,6 +213,26 @@ body {
   color: #333;
 }
 
+/* Badge de notificação */
+.badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 7px;
+  font-size: 0.75em;
+  font-weight: bold;
+  color: #fff;
+  background: #ff3b3b;
+  border-radius: 999px;
+  animation: blink 1s infinite;
+}
+
+/* Animação piscando */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+
 
 /* RESPONSIVIDADE */
 @media (max-width: 900px) {
