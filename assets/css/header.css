@@ -204,6 +204,16 @@ body {
   color: var(--text);
 }
 
+.menu-link {
+  color: #000; /* cor do texto */
+  text-decoration: none; /* remove sublinhado */
+}
+
+.menu-link:hover {
+  color: #333;
+}
+
+
 /* RESPONSIVIDADE */
 @media (max-width: 900px) {
   .logo span { font-size: 18px; }

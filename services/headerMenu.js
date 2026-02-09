@@ -1,30 +1,40 @@
-  // MENU LATERAL (Push)
-  const menuBtn = document.getElementById("menuBtn");
-  const sidebar = document.getElementById("sidebar");
-  const content = document.getElementById("content");
+// MENU LATERAL (Push)
+const menuBtn = document.getElementById("menuBtn");
+const sidebar = document.getElementById("sidebar");
+const content = document.getElementById("content");
 
-  menuBtn.addEventListener("click", () => {
-    sidebar.classList.toggle("open");
-    content.classList.toggle("shift");
+menuBtn.addEventListener("click", () => {
+  sidebar.classList.toggle("open");
+  content.classList.toggle("shift");
+});
+
+// FECHAR MENU QUANDO CLICAR EM QUALQUER ITEM
+const menuLinks = document.querySelectorAll("#sidebar a");
+
+menuLinks.forEach(link => {
+  link.addEventListener("click", () => {
+    sidebar.classList.remove("open");
+    content.classList.remove("shift");
   });
+});
 
-  // CONTADOR PARA PRÓXIMO SÁBADO 23:59
-  function nextSaturdayReset() {
-    const now = new Date();
-    const day = now.getDay();
-    const diff = (6 - day + 7) % 7;
+// CONTADOR PARA PRÓXIMO SÁBADO 23:59
+function nextSaturdayReset() {
+  const now = new Date();
+  const day = now.getDay();
+  const diff = (6 - day + 7) % 7;
 
-    let nextSat = new Date(now);
-    nextSat.setDate(now.getDate() + diff);
-    nextSat.setHours(23, 59, 0, 0);
+  let nextSat = new Date(now);
+  nextSat.setDate(now.getDate() + diff);
+  nextSat.setHours(23, 59, 0, 0);
 
-    if (nextSat <= now) {
-      nextSat.setDate(nextSat.getDate() + 7);
-    }
-    return nextSat;
+  if (nextSat <= now) {
+    nextSat.setDate(nextSat.getDate() + 7);
   }
+  return nextSat;
+}
 
-  function updateCounter() {
+function updateCounter() {
   const now = new Date();
   const target = nextSaturdayReset();
   const diff = target - now;
@@ -56,6 +66,5 @@
   }
 }
 
-
-  setInterval(updateCounter, 1000);
-  updateCounter();
+setInterval(updateCounter, 1000);
+updateCounter();
