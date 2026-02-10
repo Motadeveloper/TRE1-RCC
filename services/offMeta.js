@@ -11,8 +11,7 @@ function montarRanking(dados) {
     const treinador = (item.treinador || "").trim();
     const curso = (item.curso || "").trim().toUpperCase();
 
-    if (!treinador) return;
-    if (!curso) return;
+    if (!treinador || !curso) return;
 
     if (!mapa[treinador]) {
       mapa[treinador] = { nick: treinador, aulas: 0, pontos: 0 };
@@ -25,8 +24,12 @@ function montarRanking(dados) {
   });
 
   const ranking = Object.values(mapa)
-    .sort((a, b) => b.pontos - a.pontos)
-    // Filtra apenas quem está fora da meta (< 100)
+    .sort((a, b) => {
+      if (b.pontos !== a.pontos) {
+        return b.pontos - a.pontos;
+      }
+      return a.nick.localeCompare(b.nick, "pt-BR");
+    })
     .filter(t => t.pontos < 100);
 
   const rankingList = document.getElementById("rankingList");
@@ -34,17 +37,11 @@ function montarRanking(dados) {
 
   rankingList.innerHTML = "";
 
-  ranking.forEach((t, index) => {
-    let classe = "";
-    if (index === 0) classe = "gold";
-    if (index === 1) classe = "silver";
-    if (index === 2) classe = "bronze";
-
+  ranking.forEach(t => {
     const avatar = `https://www.habbo.com.br/habbo-imaging/avatarimage?user=${encodeURIComponent(t.nick)}&direction=3&head_direction=3&gesture=sml&size=l`;
 
     rankingList.innerHTML += `
-      <div class="ranking-item ${classe}">
-        <span class="position">${index + 1}º</span>
+      <div class="ranking-item">
         <div class="avatar" style="background-image: url('${avatar}');"></div>
         <div class="info">
           <h3>${t.nick}</h3>
@@ -56,6 +53,4 @@ function montarRanking(dados) {
       </div>
     `;
   });
-
-  
 }
