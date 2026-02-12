@@ -3,7 +3,7 @@
    ===================================================== */
 let dadosOriginais = [];
 let paginaAtual = 1;
-const itensPorPagina = 25;
+const itensPorPagina = 10;
 
 let filtroCursoAtivo = null;      // cfs | cas | null
 let filtroResultadoAtivo = null;  // aprovado | caiu | reprovado | null
