@@ -195,22 +195,26 @@ function renderFAQ(dados) {
 /* =====================================================
    PAGINAÇÃO
    ===================================================== */
+
 function atualizarPaginacao(dados) {
-  const totalPaginas = Math.ceil(dados.length / itensPorPagina);
-  document.getElementById("pageInfo").innerText =
-    `Página ${paginaAtual} de ${totalPaginas || 1}`;
+  const totalPaginas = Math.max(1, Math.ceil(dados.length / itensPorPagina));
+
+  const texto = `Página ${paginaAtual} de ${totalPaginas}`;
+
+  const pageInfo = document.getElementById("pageInfo");
+  const pageInfoTop = document.getElementById("pageInfoTop");
+
+  if (pageInfo) pageInfo.innerText = texto;
+  if (pageInfoTop) pageInfoTop.innerText = texto;
 }
 
 function nextPage() {
   const dados = obterDadosAtuais();
-  if (paginaAtual < Math.ceil(dados.length / itensPorPagina)) {
+  const totalPaginas = Math.ceil(dados.length / itensPorPagina);
+
+  if (paginaAtual < totalPaginas) {
     paginaAtual++;
-    showLoader();
-    setTimeout(() => {
-      renderFAQ(dados);
-      atualizarPaginacao(dados);
-      hideLoader();
-    }, 300);
+    trocarPagina(dados);
   }
 }
 
@@ -218,14 +222,24 @@ function prevPage() {
   if (paginaAtual > 1) {
     paginaAtual--;
     const dados = obterDadosAtuais();
-    showLoader();
-    setTimeout(() => {
-      renderFAQ(dados);
-      atualizarPaginacao(dados);
-      hideLoader();
-    }, 300);
+    trocarPagina(dados);
   }
 }
+
+/* =====================================================
+   FUNÇÃO AUXILIAR PARA TROCA DE PÁGINA
+   ===================================================== */
+
+function trocarPagina(dados) {
+  showLoader();
+
+  setTimeout(() => {
+    renderFAQ(dados);
+    atualizarPaginacao(dados);
+    hideLoader();
+  }, 300);
+}
+
 
 /* =====================================================
    FILTROS — BOTÕES E SELECTS

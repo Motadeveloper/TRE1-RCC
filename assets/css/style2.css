@@ -263,6 +263,11 @@ summary::-webkit-details-marker {
   opacity: .7;
 }
 
+.pagination-top {
+  margin-bottom: 15px;
+}
+
+
 /* Mobile */
 @media (max-width: 720px) {
   summary {

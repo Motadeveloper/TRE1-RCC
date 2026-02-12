@@ -187,17 +187,11 @@
   </div>
 
 </div>
-
-<div class="pagination">
-    <button onclick="prevPage()">‹</button>
-    <span id="pageInfo"></span>
-    <button onclick="nextPage()">›</button>
-  </div>
-</div>
   
 
   <!-- LOADER -->
   <div id="loader" class="loader">
+    
     <div class="habbo-loader">
       <div class="pixel"></div>
       <div class="pixel"></div>
@@ -209,6 +203,13 @@
     <div class="loader-text">Carregando aulas...</div>
   </div>
 
+<!-- PAGINAÇÃO SUPERIOR -->
+<div class="pagination pagination-top">
+  <button onclick="prevPage()">‹</button>
+  <span id="pageInfoTop"></span>
+  <button onclick="nextPage()">›</button>
+</div>
+
   <!-- LISTA -->
   <div id="lessons" class="lessons"></div>
 
@@ -219,7 +220,6 @@
     <button onclick="nextPage()">›</button>
   </div>
 </div>
-</br>
 
 
   </main>
