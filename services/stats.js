@@ -9,7 +9,11 @@ let totais = {
   reprovados: 0
 };
 
-// 🔢 animação do número
+
+
+
+// Animaçao de Carregamento
+
 const animateNumber = (el, target) => {
   const duration = 1200;
   const start = performance.now();
@@ -28,7 +32,13 @@ const animateNumber = (el, target) => {
   requestAnimationFrame(update);
 };
 
-// 📊 recebe os dados da planilha
+
+
+
+
+// Recebe os dos da Planilha
+
+
 document.addEventListener("planilhaPronta", (e) => {
   const dados = e.detail;
 
@@ -45,7 +55,12 @@ document.addEventListener("planilhaPronta", (e) => {
   dadosProntos = true;
 });
 
-// 👀 observa o scroll
+
+
+
+// Scroll
+
+
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach(entry => {

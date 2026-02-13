@@ -21,12 +21,12 @@ function carregarPlanilha() {
             .map(a => a.trim())
             .filter(Boolean);
 
-          // status individuais
+          // Status individuais
           const status1 = r.c[9]?.v || "";
           const status2 = r.c[10]?.v || "";
           const status3 = r.c[11]?.v || "";
 
-          // cria array de alunos com status
+          // Cria array de alunos com status
           const alunos = alunosRaw.map((nome, index) => {
             const status = index === 0 ? status1 :
                            index === 1 ? status2 :
@@ -44,20 +44,20 @@ function carregarPlanilha() {
             duracao: r.c[6]?.v || "",
             local: r.c[7]?.v || "",
 
-            // mantém o campo original (para compatibilidade)
+            // Mantém o campo original (para compatibilidade)
             aluno: r.c[8]?.v || "",
 
-            // array com alunos + status
+            // Array com alunos + status
             alunos,
 
-            // campo geral (mantido)
+            // Campo geral (mantido)
             resultado: r.c[9]?.v || "",
             comentario: r.c[13]?.v || "-x-",
             tutoria: r.c[12]?.v || ""
           };
         });
 
-      // 🔥 DISPARA O EVENTO APENAS DEPOIS DE PREENCHER OS DADOS
+      
       document.dispatchEvent(
         new CustomEvent("planilhaPronta", { detail: window.dadosPlanilha })
       );

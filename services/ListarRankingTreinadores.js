@@ -54,9 +54,10 @@ function montarRanking(dados) {
     `;
   });
 
-  // ==============================
-  // 🔥 AQUI: pega o primeiro lugar
-  // ==============================
+
+
+// Recebe o primeiro lugar do Ranking
+
   const primeiro = ranking[0];
   if (primeiro) {
     requestAnimationFrame(() => {
@@ -64,7 +65,7 @@ function montarRanking(dados) {
       if (inputPesquisa) {
         inputPesquisa.value = primeiro.nick;
 
-        // ⚡ Dispara a pesquisa automaticamente
+        // Dispara a pesquisa automaticamente
         inputPesquisa.dispatchEvent(new Event("input"));
       }
     });

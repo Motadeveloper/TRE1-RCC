@@ -1,25 +1,30 @@
-/* =====================================================
-   VARIÁVEIS GLOBAIS
-   ===================================================== */
 let dadosOriginais = [];
 let paginaAtual = 1;
 const itensPorPagina = 10;
 
-let filtroCursoAtivo = null;      // cfs | cas | null
-let filtroResultadoAtivo = null;  // aprovado | caiu | reprovado | null
-let termoBusca = "";              // treinador ou aluno
+let filtroCursoAtivo = null;      
+let filtroResultadoAtivo = null;  
+let termoBusca = "";              
 
 const loader = document.getElementById("loader");
 const lessonsContainer = document.getElementById("lessons");
 const inputBusca = document.getElementById("busca");
 const btnClear = document.querySelector(".btn-clear");
 
-/* =====================================================
-   LOADER
-   ===================================================== */
+// Controla paginação superior e inferior
+
+
+const paginations = document.querySelectorAll(".pagination");
+
+
+// Carregamento
+
 function showLoader() {
   loader.style.display = "flex";
   lessonsContainer.style.display = "none";
+
+  // Esconde paginação durante carregamento
+  paginations.forEach(p => p.style.display = "none");
 }
 
 function hideLoader() {
@@ -27,33 +32,30 @@ function hideLoader() {
   lessonsContainer.style.display = "block";
 }
 
-/* =====================================================
-   AVATARES
-   ===================================================== */
+
+// Avatar API Habbo Hotel
+
+
 function treinadorAvatar(user) {
-  return `https://www.habbo.com.br/habbo-imaging/avatarimage?user=${encodeURIComponent(
-    user
-  )}&headonly=1&head_direction=10&size=m`;
+  return `https://www.habbo.com.br/habbo-imaging/avatarimage?user=${encodeURIComponent(user)}&headonly=1&head_direction=10&size=m`;
 }
 
 function alunoAvatar(user) {
-  return `https://www.habbo.com.br/habbo-imaging/avatarimage?user=${encodeURIComponent(
-    user
-  )}&headonly=1&head_direction=4&size=m`;
+  return `https://www.habbo.com.br/habbo-imaging/avatarimage?user=${encodeURIComponent(user)}&headonly=1&head_direction=4&size=m`;
 }
 
-/* =====================================================
-   FORMATAÇÃO DE DATA
-   ===================================================== */
+
+// Formatação da Data
+
+
 function formatarData(valor) {
   if (!valor) return "";
   const data = new Date(valor);
   return data.toLocaleString("pt-BR");
 }
 
-/* =====================================================
-   EVENTO DA PLANILHA
-   ===================================================== */
+
+
 document.addEventListener("planilhaPronta", (e) => {
   showLoader();
 
@@ -68,11 +70,13 @@ document.addEventListener("planilhaPronta", (e) => {
   aplicarFiltros();
 });
 
-/* =====================================================
-   OBTÉM DADOS CONFORME FILTROS + BUSCA
-   ===================================================== */
+
+// Filtro e Busca
+
+
 function obterDadosAtuais() {
   return dadosOriginais.filter(item => {
+
     const cursoOk =
       !filtroCursoAtivo ||
       (item.curso || "").toLowerCase().includes(filtroCursoAtivo);
@@ -92,9 +96,10 @@ function obterDadosAtuais() {
   });
 }
 
-/* =====================================================
-   APLICA FILTROS
-   ===================================================== */
+
+// Aplicação de Filtros
+
+
 function aplicarFiltros() {
   const dadosFiltrados = obterDadosAtuais();
 
@@ -108,12 +113,12 @@ function aplicarFiltros() {
   }, 300);
 }
 
-/* =====================================================
-   RENDERIZAÇÃO
-   ===================================================== */
+
+// Renderização da Pesquisa
+
+
 function renderFAQ(dados) {
-  const container = document.getElementById("lessons");
-  container.innerHTML = "";
+  lessonsContainer.innerHTML = "";
 
   const inicio = (paginaAtual - 1) * itensPorPagina;
   const fim = inicio + itensPorPagina;
@@ -123,7 +128,6 @@ function renderFAQ(dados) {
     const alunos = item.alunos || [];
     const temMultiplosAlunos = alunos.length > 1;
 
-    // statusClass só é aplicado quando tem 1 aluno
     let statusClass = "";
     const resultado = (item.resultado || "").toLowerCase();
 
@@ -132,12 +136,10 @@ function renderFAQ(dados) {
       else if (resultado.includes("caiu")) statusClass = "caiu";
       else statusClass = "reprovado";
     } else {
-      statusClass = "multi-alunos"; // cor cinza apenas quando tem mais de 1 aluno
+      statusClass = "multi-alunos";
     }
 
-    // monta HTML dos alunos
-    const alunosHtml = alunos.map(aluno => {
-      return `
+    const alunosHtml = alunos.map(aluno => `
         <div class="aluno">
           <img src="${alunoAvatar(aluno.nome)}">
           <div class="info">
@@ -145,17 +147,9 @@ function renderFAQ(dados) {
             <span class="role">${aluno.status || ""}</span>
           </div>
         </div>
-      `;
-    }).join("");
+    `).join("");
 
-    // status de todos os alunos no bloco Status
-    const statusAlunosHtml = alunos.map(aluno => {
-      return `<div class="status-aluno">
-        <strong>${aluno.nome}</strong>: ${aluno.status || "Sem status"}
-      </div>`;
-    }).join("");
-
-    container.innerHTML += `
+    lessonsContainer.innerHTML += `
       <details class="lesson ${statusClass}">
         <summary>
           <div class="person">
@@ -192,11 +186,13 @@ function renderFAQ(dados) {
   });
 }
 
-/* =====================================================
-   PAGINAÇÃO
-   ===================================================== */
+
+
+// Paginação
+
 
 function atualizarPaginacao(dados) {
+
   const totalPaginas = Math.max(1, Math.ceil(dados.length / itensPorPagina));
 
   const texto = `Página ${paginaAtual} de ${totalPaginas}`;
@@ -206,7 +202,14 @@ function atualizarPaginacao(dados) {
 
   if (pageInfo) pageInfo.innerText = texto;
   if (pageInfoTop) pageInfoTop.innerText = texto;
+
+  if (totalPaginas > 1) {
+    paginations.forEach(p => p.style.display = "flex");
+  } else {
+    paginations.forEach(p => p.style.display = "none");
+  }
 }
+
 
 function nextPage() {
   const dados = obterDadosAtuais();
@@ -226,9 +229,9 @@ function prevPage() {
   }
 }
 
-/* =====================================================
-   FUNÇÃO AUXILIAR PARA TROCA DE PÁGINA
-   ===================================================== */
+
+// Troca de pagina da listagem
+
 
 function trocarPagina(dados) {
   showLoader();
@@ -240,14 +243,14 @@ function trocarPagina(dados) {
   }, 300);
 }
 
+// Filtro Botões e Select
 
-/* =====================================================
-   FILTROS — BOTÕES E SELECTS
-   ===================================================== */
 const selectCurso = document.getElementById("selectCurso");
 const selectResultado = document.getElementById("selectResultado");
 
-/* --- Curso (botões) --- */
+// Botões pro curso
+
+
 document.querySelectorAll(".btn-filtro.curso").forEach(botao => {
   botao.addEventListener("click", () => {
     const valor = botao.dataset.valor;
@@ -263,7 +266,8 @@ document.querySelectorAll(".btn-filtro.curso").forEach(botao => {
   });
 });
 
-/* --- Resultado (botões) --- */
+// Rederização da filtragem por Curso
+
 document.querySelectorAll(".btn-filtro.resultado").forEach(botao => {
   botao.addEventListener("click", () => {
     const valor = botao.dataset.valor;
@@ -279,7 +283,11 @@ document.querySelectorAll(".btn-filtro.resultado").forEach(botao => {
   });
 });
 
-/* --- Curso (select mobile) --- */
+
+
+// Select Mobile
+
+
 if (selectCurso) {
   selectCurso.addEventListener("change", () => {
     filtroCursoAtivo = selectCurso.value || null;
@@ -297,7 +305,10 @@ if (selectCurso) {
   });
 }
 
-/* --- Resultado (select mobile) --- */
+// Renderização do Select Mobile
+
+
+
 if (selectResultado) {
   selectResultado.addEventListener("change", () => {
     filtroResultadoAtivo = selectResultado.value || null;
@@ -315,9 +326,10 @@ if (selectResultado) {
   });
 }
 
-/* =====================================================
-   BUSCA (TREINADOR / ALUNO)
-   ===================================================== */
+
+// Busca por Treinadores
+
+
 if (inputBusca) {
   inputBusca.addEventListener("input", () => {
     termoBusca = inputBusca.value.trim().toLowerCase();
@@ -326,9 +338,12 @@ if (inputBusca) {
   });
 }
 
-/* =====================================================
-   LIMPAR TODOS OS FILTROS
-   ===================================================== */
+
+
+
+// Clear da Pesquisa
+
+
 if (btnClear) {
   btnClear.addEventListener("click", () => {
     filtroCursoAtivo = null;

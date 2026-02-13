@@ -6,7 +6,12 @@ function processarPlanilha(dados) {
   montarMapaTreinadores(rankingDados);
   montarRanking();
 
-  // Pega o primeiro lugar do ranking
+
+
+// Pega o primeiro lugar do ranking
+
+
+
   const primeiro = Object.values(window.mapaTreinadores)
                       .sort((a, b) => b.pontos - a.pontos)[0];
 
@@ -16,7 +21,7 @@ function processarPlanilha(dados) {
       if (inputPesquisa) {
         inputPesquisa.value = primeiro.nick;
 
-        // ⚡ Dispara a pesquisa automaticamente
+        // Dispara a pesquisa automaticamente
         inputPesquisa.dispatchEvent(new Event("input"));
       }
     });
@@ -27,14 +32,16 @@ document.addEventListener("planilhaPronta", (e) => {
   processarPlanilha(e.detail);
 });
 
+
+
 // Se a planilha já estiver carregada antes do script ser executado
+
+
 if (window.dadosPlanilha && window.dadosPlanilha.length > 0) {
   processarPlanilha(window.dadosPlanilha);
 }
 
-// ----------------------------
-// O resto do código permanece igual
-// ----------------------------
+
 
 function montarMapaTreinadores(dados) {
   window.mapaTreinadores = {};

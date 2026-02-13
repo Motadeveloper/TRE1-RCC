@@ -1,4 +1,5 @@
-// MENU LATERAL (Push)
+// Menu Lateral 
+
 const menuBtn = document.getElementById("menuBtn");
 const sidebar = document.getElementById("sidebar");
 const content = document.getElementById("content");
@@ -8,7 +9,14 @@ menuBtn.addEventListener("click", () => {
   content.classList.toggle("shift");
 });
 
-// FECHAR MENU QUANDO CLICAR EM QUALQUER ITEM
+
+
+
+
+// Fechar Menu
+
+
+
 const menuLinks = document.querySelectorAll("#sidebar a");
 
 menuLinks.forEach(link => {
@@ -18,7 +26,11 @@ menuLinks.forEach(link => {
   });
 });
 
-// CONTADOR PARA PRÓXIMO SÁBADO 23:59
+
+
+// Contador de Meta Semanal ( SÁBADO 23:59 )
+
+
 function nextSaturdayReset() {
   const now = new Date();
   const day = now.getDay();
