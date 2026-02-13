@@ -40,24 +40,18 @@ function montarRanking(dados) {
 
     let alunos = [];
 
-    if (typeof item.alunos === "string") {
+    if (Array.isArray(item.alunos)) {
+
       alunos = item.alunos
-        .split("/")
-        // remove status tipo (caiu)
-        .map(a => a.replace(/\(.*?\)/gi, ""))
-        .map(a => a.trim())
-        // remove vazios e "Não houve"
-        .filter(a =>
-          a.length > 0 &&
-          a.toLowerCase() !== "não houve" &&
-          a.toLowerCase() !== "nao houve"
+        .map(a => (a.nome || "").trim())
+        .filter(nome =>
+          nome.length > 0 &&
+          nome.toLowerCase() !== "não houve" &&
+          nome.toLowerCase() !== "nao houve"
         );
 
       // remove duplicados
       alunos = [...new Set(alunos)];
-
-      // ✅ Mantemos todos os alunos, sem limitar a 3
-      // alunos = alunos.slice(0, 3); <-- removido
     }
 
     /* ==========================
@@ -77,7 +71,6 @@ function montarRanking(dados) {
 
     if (valorCurso === 0) return;
 
-    // cada aluno vale valorCurso pontos, ou valorCurso se não houver alunos
     if (alunos.length > 0) {
       mapa[treinadorKey].pontos += valorCurso * alunos.length;
     } else {

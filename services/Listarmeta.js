@@ -1,17 +1,15 @@
 let rankingDados = [];
 window.mapaTreinadores = {}; // GLOBAL
 
+/* ==========================
+   PROCESSAR PLANILHA
+========================== */
 function processarPlanilha(dados) {
   rankingDados = dados;
   montarMapaTreinadores(rankingDados);
   montarRanking();
 
-
-
-// Pega o primeiro lugar do ranking
-
-
-
+  // Pega o primeiro lugar do ranking
   const primeiro = Object.values(window.mapaTreinadores)
                       .sort((a, b) => b.pontos - a.pontos)[0];
 
@@ -28,28 +26,27 @@ function processarPlanilha(dados) {
   }
 }
 
+/* ==========================
+   EVENTO DE PLANILHA CARREGADA
+========================== */
 document.addEventListener("planilhaPronta", (e) => {
   processarPlanilha(e.detail);
 });
 
-
-
 // Se a planilha já estiver carregada antes do script ser executado
-
-
 if (window.dadosPlanilha && window.dadosPlanilha.length > 0) {
   processarPlanilha(window.dadosPlanilha);
 }
 
-
-
+/* ==========================
+   MONTAR MAPA DE TREINADORES
+========================== */
 function montarMapaTreinadores(dados) {
   window.mapaTreinadores = {};
 
   dados.forEach(item => {
     const nick = item.treinador?.trim();
     const curso = item.curso?.trim().toUpperCase();
-    let resultado = item.resultado?.toLowerCase() || "";
 
     if (!nick || !curso) return;
 
@@ -63,16 +60,62 @@ function montarMapaTreinadores(dados) {
       };
     }
 
+    /* ==========================
+       PROCESSAR ALUNOS COM STATUS
+    ========================== */
+    let alunos = [];
+    if (Array.isArray(item.alunos)) {
+      alunos = item.alunos
+        .map(a => ({
+          nome: (a.nome || "").trim(),
+          status: (a.status || "").toLowerCase()
+        }))
+        .filter(a => a.nome.length > 0 &&
+                     a.nome.toLowerCase() !== "não houve" &&
+                     a.nome.toLowerCase() !== "nao houve");
+
+      // remove duplicados
+      const nomesUnicos = new Set();
+      alunos = alunos.filter(a => {
+        if (nomesUnicos.has(a.nome)) return false;
+        nomesUnicos.add(a.nome);
+        return true;
+      });
+    }
+
+    /* ==========================
+       CONTAR AULA
+    ========================== */
     window.mapaTreinadores[nick].aulas += 1;
 
-    if (curso === "CFS") window.mapaTreinadores[nick].pontos += 60;
-    if (curso === "CAS") window.mapaTreinadores[nick].pontos += 40;
+    /* ==========================
+       CALCULAR PONTOS POR ALUNO
+    ========================== */
+    const valorCurso =
+      curso === "CFS" ? 60 :
+      curso === "CAS" ? 40 :
+      0;
 
-    if (resultado.includes("aprov")) window.mapaTreinadores[nick].aprovados += 1;
-    else window.mapaTreinadores[nick].reprovados += 1;
+    if (valorCurso > 0) {
+      if (alunos.length > 0) {
+        alunos.forEach(a => {
+          window.mapaTreinadores[nick].pontos += valorCurso;
+
+          // contabilizar aprovação/reprovação
+          if (a.status.includes("aprov")) window.mapaTreinadores[nick].aprovados += 1;
+          else window.mapaTreinadores[nick].reprovados += 1;
+        });
+      } else {
+        // Caso não haja nenhum aluno, ainda soma valor da aula
+        window.mapaTreinadores[nick].pontos += valorCurso;
+      }
+    }
   });
 }
 
+/* ==========================
+   MONTAR RANKING
+========================== */
 function montarRanking() {
   const ranking = Object.values(window.mapaTreinadores)
     .sort((a, b) => b.pontos - a.pontos)
@@ -96,12 +139,15 @@ function montarRanking() {
           <h3>${t.nick}</h3>
           <p>Aulas: ${t.aulas}</p>
         </div>
-        <div class="points ${pontosClasse}">${t.pontos}%</div>
+        <div class="points ${pontosClasse}">${t.pontos} pts</div>
       </div>
     `;
   });
 }
 
+/* ==========================
+   PESQUISAR TREINADOR
+========================== */
 function pesquisarTreinador(nickname) {
   const nick = nickname.trim().toLowerCase();
   const mapaTreinadores = window.mapaTreinadores || {};
@@ -145,6 +191,9 @@ function pesquisarTreinador(nickname) {
     avatarPesquisa.style.backgroundImage = `url('https://www.habbo.com.br/habbo-imaging/avatarimage?user=${encodeURIComponent(treinador.nick)}&direction=3&head_direction=3&gesture=sml&size=l')`;
 }
 
+/* ==========================
+   EVENTO DE INPUT DE PESQUISA
+========================== */
 const inputPesquisa = document.getElementById("inputPesquisa");
 if (inputPesquisa) {
   inputPesquisa.addEventListener("input", () => {
