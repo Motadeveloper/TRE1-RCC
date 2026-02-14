@@ -200,3 +200,4 @@ if (inputPesquisa) {
     pesquisarTreinador(inputPesquisa.value);
   });
 }
+

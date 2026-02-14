@@ -73,6 +73,15 @@
 </br>
 </br>
 <body>
+
+<!-- LOADER GLOBAL -->
+<div id="globalLoader" class="global-loader">
+  <div class="loader-content">
+    <img src="assets/img/loader.gif" alt="Carregando..." />
+    <p id="loaderMessage">Baixando dados do TRE</p>
+  </div>
+</div>
+
 <main>
 <h1> (TOP 5) Ranking</h1>
 <div class="ranking-body">
@@ -229,8 +238,7 @@
 </footer>
 
 
-
-
+<script src="services/globalLoader.js"></script>
 <script src="services/headerMenu.js"></script>
 <script src="services/dadosPlanilha.js"></script>
 <script src="services/Listaaulas.js"></script>
@@ -240,10 +248,6 @@
 <script src="services/stats.js"></script>
 <script src="services/alertaOffMeta.js"></script>
 
-
-
-
-
-
 </body>
+
 </html>

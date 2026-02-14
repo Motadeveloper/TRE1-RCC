@@ -21,16 +21,15 @@ function carregarPlanilha() {
             .map(a => a.trim())
             .filter(Boolean);
 
-          // Status individuais
           const status1 = r.c[9]?.v || "";
           const status2 = r.c[10]?.v || "";
           const status3 = r.c[11]?.v || "";
 
-          // Cria array de alunos com status
           const alunos = alunosRaw.map((nome, index) => {
-            const status = index === 0 ? status1 :
-                           index === 1 ? status2 :
-                           index === 2 ? status3 : "";
+            const status =
+              index === 0 ? status1 :
+              index === 1 ? status2 :
+              index === 2 ? status3 : "";
 
             return { nome, status };
           });
@@ -43,26 +42,26 @@ function carregarPlanilha() {
             termino: r.c[5]?.v || "",
             duracao: r.c[6]?.v || "",
             local: r.c[7]?.v || "",
-
-            // Mantém o campo original (para compatibilidade)
             aluno: r.c[8]?.v || "",
-
-            // Array com alunos + status
             alunos,
-
-            // Campo geral (mantido)
             resultado: r.c[9]?.v || "",
             comentario: r.c[13]?.v || "-x-",
             tutoria: r.c[12]?.v || ""
           };
         });
 
-      
       document.dispatchEvent(
         new CustomEvent("planilhaPronta", { detail: window.dadosPlanilha })
       );
     })
-    .catch(err => console.error("Erro ao carregar a planilha:", err));
+    .catch(err => {
+      console.error("Erro ao carregar a planilha:", err);
+    });
 }
 
-carregarPlanilha();
+// 🔥 AGORA SIM — espera terminar o fetch
+carregarPlanilha().finally(() => {
+  if (window.finalizarLoader) {
+    window.finalizarLoader();
+  }
+});

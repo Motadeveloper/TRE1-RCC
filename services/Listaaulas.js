@@ -361,3 +361,6 @@ if (btnClear) {
     aplicarFiltros();
   });
 }
+
+
+
