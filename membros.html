@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Membros da Companhia | TRE-1 Policia RCC  </title>
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/header.css">
+<link rel="stylesheet" href="assets/css/footer.css">
+<link rel="stylesheet" href="assets/css/sidemembros.css">
+</head>
+
+<div class="header">
+    <div class="logo">
+       <a href="index.html">
+      <img src="https://www.habbo.com.br/habbo-imaging/badge/b09104s43131s50134s17113s17115a051fdde00b85d5ec8603e4f87cff210.gif" alt="Logo TRE-1">
+      </a>
+      <span>TRE-1</span>
+    </div>
+
+    <div class="counter" id="counter">
+      <span id="time">#TRE</span>
+    </div>
+
+    <div class="menu-btn" id="menuBtn">
+      <div class="bar"></div>
+    </div>
+  </div>
+
+  <div class="sidebar" id="sidebar">
+  <h2>Menu</h2>
+
+  <!-- PESQUISA TREINADOR -->
+  <div class="sidebar-search">
+  </br>
+    <h3>Pesquisar Treinador</h3>
+      </br>
+    <input type="text" id="inputPesquisa" placeholder="Digite o nickname..." />
+
+    <div class="pesquisa-resultado" id="pesquisaResultado" style="display:none;">
+      <div class="avatar" id="avatarPesquisa"></div>
+      <h3 id="nickPesquisa"></h3>
+      <p id="aulasPesquisa"></p>
+      <p id="pontosPesquisa"></p>
+      <div class="meta-alert" id="metaAlert"></div>
+    </div>
+  </div>
+
+    <ul>
+  </br>
+  <li>
+    <a href="index.html" class="menu-link">
+      <img src="assets/img/icones/home.png" alt="Home">
+      <span>Início</span>
+    </a>
+  </li>
+  <li>
+    <a href="ranking.html" class="menu-link">
+      <img src="assets/img/icones/ranking.png" alt="Ranking">
+      <span>Ranking</span>
+    </a>
+  </li>
+  <li>
+    <a href="#historico" class="menu-link">
+    <img src="assets/img/icones/aulas.png" alt="Histórico">
+    <span>Histórico de aulas</span>
+    </a>
+  </li>
+  <li>
+  <a href="meta.html" class="menu-link">
+    <img src="assets/img/icones/meta.png" alt="Fora da Meta">
+    <span>
+      Fora da Meta
+      <span class="badge" id="badgeMeta">0</span>
+    </span>
+  </a>
+</li>
+    </ul>
+  </div>
+</br>
+</br>
+</br>
+</br>
+
+<body>
+<main>
+
+<h1 style="text-align:center; font-size: 1.7em;">Membros TRE</h1>
+
+ <!-- LIDERANÇA -->
+  <div class="side-section">
+    <h2>Liderança</h2>
+    <div class="card-container" id="liderViceContainer"></div>
+  </div>
+
+  <!-- MINISTROS -->
+<div class="side-section">
+  <h2>Ministros</h2>
+  <div class="carousel-wrapper" id="ministrosWrapper">
+    <div class="carousel-track card-container" id="ministrosContainer"></div>
+    <div class="carousel-indicators" id="ministrosIndicators"></div>
+  </div>
+</div>
+
+<!-- NOVOS MEMBROS -->
+<div class="side-section">
+  <h2>Novos Membros</h2>
+  <div class="carousel-wrapper" id="novosWrapper">
+    <div class="carousel-track card-container" id="novosContainer"></div>
+    <div class="carousel-indicators" id="novosIndicators"></div>
+  </div>
+</div>
+</br>
+
+
+
+</main>
+
+<footer class="footer">
+  <div class="footer-line"></div>
+
+  <div class="footer-content">
+    <span class="footer-text">
+      <strong>TRE - RCC</strong>
+      <img src="assets/img/tab_icon_05_fun.gif" class="footer-icon" alt="">
+       por
+      <a href="https://wa.me/5581994965571" target="_blank">
+        <strong>Fernando Mota</strong>
+      </a>
+    </span>
+    </br>
+</br>
+
+  </div>
+</footer>
+
+
+<script src="services/headerMenu.js"></script>
+
+
+</body>
+</html>
