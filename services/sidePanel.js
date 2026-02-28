@@ -1,3 +1,10 @@
+const SHEET_URL =
+  "https://docs.google.com/spreadsheets/d/1h3NkZEERfH5e5_Y3YMzV9qFVPgntxMn96XubDggX6Xo/gviz/tq?tqx=out:csv&gid=531506560";
+
+/* ===================================================
+   CARD
+=================================================== */
+
 function criarCard(nick) {
   const card = document.createElement("div");
   card.classList.add("habbo-card");
@@ -12,35 +19,99 @@ function criarCard(nick) {
   return card;
 }
 
-// Função para renderizar cards com animação sequencial
-function renderCards(container, cardsArray) {
-  // Primeiro, adicionar todos os cards ao container
-  const cards = cardsArray.map(nick => {
+function renderCards(container, nicks) {
+  container.innerHTML = "";
+
+  const unicos = [...new Set(nicks)];
+
+  unicos.forEach((nick, index) => {
     const card = criarCard(nick);
     container.appendChild(card);
-    return card;
-  });
 
-  // Depois, adicionar animação sequencial
-  cards.forEach((card, index) => {
     setTimeout(() => {
       card.classList.add("enter");
-    }, index * 100); // 100ms entre cada card
+    }, index * 100);
   });
 }
 
-// Dados de exemplo
-const lider = ["benjlfbaby"];
-const vices = ["BeGomes94.","claryflyy."];
-const ministros = ["andrej0128s","kaah_.","bi4858","Dr.jack-","Mwdeiros","Stynte-BAN","diego21927","Kesie"];
-const novos = ["BomPolicial-.","xSkull","Lukezeraaa","GuilhermeK="];
+/* ===================================================
+   CSV PARSER (COLUNA A = CARGO | B = NICK)
+=================================================== */
 
-// Containers
-const liderViceContainer = document.getElementById("liderViceContainer");
-const ministrosContainer = document.getElementById("ministrosContainer");
-const novosContainer = document.getElementById("novosContainer");
+function limpar(valor) {
+  return valor.replace(/^"+|"+$/g, "").trim();
+}
 
-// Renderização
-renderCards(liderViceContainer, lider.concat(vices));
-renderCards(ministrosContainer, ministros);
-renderCards(novosContainer, novos);
+function parseCSV(csv) {
+  return csv.split("\n").map(linha => {
+    const colunas = linha.split(",");
+
+    return {
+      cargo: limpar(colunas[0] || ""),
+      nick: limpar(colunas[1] || "")
+    };
+  });
+}
+
+/* ===================================================
+   FETCH + FILTRO
+=================================================== */
+
+async function carregarMembros() {
+  try {
+    const res = await fetch(SHEET_URL);
+    const csv = await res.text();
+
+    const linhas = parseCSV(csv);
+
+    const lider = [];
+    const vices = [];
+    const ministros = [];
+    const novos = [];
+
+    linhas.forEach(({ cargo, nick }) => {
+      if (!cargo || !nick) return;
+
+      const c = cargo.toLowerCase();
+
+      // ignora cabeçalho
+      if (c === "cargo") return;
+
+      if (c === "líder") lider.push(nick);
+
+      else if (c.includes("vice")) vices.push(nick);
+
+      else if (c.includes("minist")) ministros.push(nick);
+
+      else if (c === "tre.1") novos.push(nick);
+    });
+
+    console.log("✅ Lider:", lider);
+    console.log("✅ Vices:", vices);
+    console.log("✅ Ministros:", ministros);
+    console.log("✅ TRE.1:", novos);
+
+    /* RENDER */
+
+    renderCards(
+      document.getElementById("liderViceContainer"),
+      [...lider, ...vices]
+    );
+
+    renderCards(
+      document.getElementById("ministrosContainer"),
+      ministros
+    );
+
+    renderCards(
+      document.getElementById("novosContainer"),
+      novos.slice(-4).reverse()
+    );
+
+  } catch (erro) {
+    console.error("Erro ao carregar planilha:", erro);
+  }
+}
+
+/* iniciar */
+carregarMembros();

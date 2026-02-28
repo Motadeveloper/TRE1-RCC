@@ -1,0 +1,260 @@
+/* ================= PAINEL MEMBRO ================= */
+
+.member-panel {
+  position: fixed;
+  top: 0;
+  right: -420px;
+  width: 400px;
+  height: 100%;
+  background: #0b0b0b;
+  border-left: 2px solid #800000;
+  box-shadow: -5px 0 20px rgba(0,0,0,0.6);
+  transition: right 0.4s ease;
+  z-index: 9999;
+}
+
+.member-panel.active {
+  right: 0;
+}
+
+.panel-content {
+  padding: 25px;
+  color: white;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.panel-content h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #300000;
+  padding-bottom: 10px;
+}
+
+.close-btn {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #ff0000;
+}
+
+.info-grid p {
+  background: #141414;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  border: 1px solid #2a0000;
+  font-size: 13px;
+}
+
+/* ================= CONTAINER GERAL ================= */
+
+.ranking-right {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+/* ================= TÍTULOS ================= */
+
+.side-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.side-section h2 {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #ffffff;
+  margin-bottom: 20px;
+  padding: 12px 0;
+}
+
+/* ================= GRID CENTRALIZADO ================= */
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+
+/* ================= CARD ================= */
+
+.habbo-card {
+  width: 85px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform .25s ease;
+}
+
+.habbo-card:hover {
+  transform: translateY(-4px);
+}
+
+/* ================= AVATAR ================= */
+
+.habbo-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #0c0c0c;
+  border: 2px solid #ff0000;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* glow vermelho */
+  box-shadow:
+    0 0 10px rgba(255,0,0,0.7),
+    inset 0 0 8px rgba(255,0,0,0.3);
+
+  transition: all .3s ease;
+}
+
+.habbo-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* HOVER GLOW */
+.habbo-card:hover .habbo-avatar {
+  box-shadow:
+    0 0 18px rgba(255,0,0,1),
+    inset 0 0 10px rgba(255,0,0,0.6);
+}
+
+/* ================= NOME ================= */
+
+.habbo-name {
+  margin-top: 8px;
+  background: #2b2b2b;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  color: #fff;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+/* líder destaque */
+#liderViceContainer .habbo-card:first-child .habbo-avatar {
+  box-shadow:
+    0 0 22px rgba(255,0,0,1),
+    inset 0 0 10px rgba(255,0,0,0.8);
+}
+
+/* ================= HEADER PERFIL ================= */
+
+.member-header {
+  text-align: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #300000;
+}
+
+/* avatar grande */
+
+.member-avatar-big {
+  width: 110px;
+  height: 110px;
+  margin: 0 auto 10px;
+  border-radius: 50%;
+  background: #0c0c0c;
+  border: 3px solid #ff0000;
+  overflow: hidden;
+
+  box-shadow:
+    0 0 18px rgba(255,0,0,0.9),
+    inset 0 0 10px rgba(255,0,0,0.5);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.member-avatar-big img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* nome */
+
+.member-header h3 {
+  margin: 8px 0 5px;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+/* badge cargo */
+
+.cargo-badge {
+  background: linear-gradient(90deg,#330000,#700000);
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  border: 1px solid #ff0000;
+}
+
+/* ================= SCROLL PERSONALIZADO ================= */
+
+.panel-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.panel-content::-webkit-scrollbar-track {
+  background: #080808;
+  border-radius: 10px;
+}
+
+.panel-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    #550000,
+    #ff0000
+  );
+  border-radius: 10px;
+  border: 1px solid #300000;
+}
+
+.panel-content::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    #ff0000,
+    #ff3b3b
+  );
+  box-shadow: 0 0 8px rgba(255,0,0,0.7);
+}
+
+.member-panel::before,
+.member-panel::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.member-panel::before {
+  top: 0;
+  background: linear-gradient(to bottom, #0b0b0b, transparent);
+}
+
+.member-panel::after {
+  bottom: 0;
+  background: linear-gradient(to top, #0b0b0b, transparent);
+}

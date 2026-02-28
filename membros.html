@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/header.css">
 <link rel="stylesheet" href="assets/css/footer.css">
-<link rel="stylesheet" href="assets/css/sidemembros.css">
+<link rel="stylesheet" href="assets/css/painelmembros.css">
 </head>
 
 <div class="header">
@@ -90,30 +90,147 @@
 
 <h1 style="text-align:center; font-size: 1.7em;">Membros TRE</h1>
 
- <!-- LIDERANÇA -->
+ <!-- ================= MEMBROS ================= -->
+
+<div class="ranking-right">
+
+  <!-- LIDERANÇA -->
   <div class="side-section">
-    <h2>Liderança</h2>
-    <div class="card-container" id="liderViceContainer"></div>
+    <h2>LIDERANÇA</h2>
+
+    <div class="card-container" id="liderViceContainer">
+
+      <div class="habbo-card" onclick="openMember(this)">
+        <div class="habbo-avatar">
+          <img src="https://www.habbo.com.br/habbo-imaging/avatarimage?user=benjifbaby&size=l">
+        </div>
+        <div class="habbo-name">benjifbaby</div>
+      </div>
+
+      <div class="habbo-card" onclick="openMember(this)">
+        <div class="habbo-avatar">
+          <img src="https://www.habbo.com.br/habbo-imaging/avatarimage?user=BeGomes94.&size=l">
+        </div>
+        <div class="habbo-name">BeGomes94.</div>
+      </div>
+
+      <div class="habbo-card" onclick="openMember(this)">
+        <div class="habbo-avatar">
+          <img src="https://www.habbo.com.br/habbo-imaging/avatarimage?user=claryflyy.&size=l">
+        </div>
+        <div class="habbo-name">claryflyy.</div>
+      </div>
+
+    </div>
   </div>
+
 
   <!-- MINISTROS -->
-<div class="side-section">
-  <h2>Ministros</h2>
-  <div class="carousel-wrapper" id="ministrosWrapper">
-    <div class="carousel-track card-container" id="ministrosContainer"></div>
-    <div class="carousel-indicators" id="ministrosIndicators"></div>
+  <div class="side-section">
+    <h2>MINISTROS</h2>
+
+    <div class="card-container">
+
+      <div class="habbo-card">
+        <div class="habbo-avatar">
+          <img src="https://www.habbo.com.br/habbo-imaging/avatarimage?user=benjlfbaby&direction=3&head_direction=3&gesture=sml&size=l">
+        </div>
+        <div class="habbo-name">andrej0128S</div>
+      </div>
+
+      <div class="habbo-card">
+        <div class="habbo-avatar">
+          <img src="https://www.habbo.com.br/habbo-imaging/avatarimage?user=kaah.&size=l">
+        </div>
+        <div class="habbo-name">kaah.</div>
+      </div>
+
+      <div class="habbo-card">
+        <div class="habbo-avatar">
+          <img src="https://www.habbo.com.br/habbo-imaging/avatarimage?user=bi4858&size=l">
+        </div>
+        <div class="habbo-name">bi4858</div>
+      </div>
+
+      <div class="habbo-card">
+        <div class="habbo-avatar">
+          <img src="https://www.habbo.com.br/habbo-imaging/avatarimage?user=Dr.jack-&size=l">
+        </div>
+        <div class="habbo-name">Dr.jack-</div>
+      </div>
+
+    </div>
   </div>
+
+
+  <!-- NOVOS MEMBROS -->
+  <div class="side-section">
+    <h2>NOVOS MEMBROS</h2>
+
+    <div class="card-container">
+
+      <div class="habbo-card">
+        <div class="habbo-avatar">
+          <img src="https://www.habbo.com.br/habbo-imaging/avatarimage?user=BomPolicial-&size=l">
+        </div>
+        <div class="habbo-name">BomPolicial-</div>
+      </div>
+
+      <div class="habbo-card">
+        <div class="habbo-avatar">
+          <img src="https://www.habbo.com.br/habbo-imaging/avatarimage?user=xSkull&size=l">
+        </div>
+        <div class="habbo-name">xSkull</div>
+      </div>
+
+      <div class="habbo-card">
+        <div class="habbo-avatar">
+          <img src="https://www.habbo.com.br/habbo-imaging/avatarimage?user=Lukezeraaa&size=l">
+        </div>
+        <div class="habbo-name">Lukezeraaa</div>
+      </div>
+
+    </div>
+  </div>
+
 </div>
 
-<!-- NOVOS MEMBROS -->
-<div class="side-section">
-  <h2>Novos Membros</h2>
-  <div class="carousel-wrapper" id="novosWrapper">
-    <div class="carousel-track card-container" id="novosContainer"></div>
-    <div class="carousel-indicators" id="novosIndicators"></div>
+
+<!-- ================= PAINEL DE INFORMAÇÕES ================= -->
+
+<div id="memberPanel" class="member-panel">
+  <div class="panel-content">
+
+    <span class="close-btn" onclick="closePanel()">✕</span>
+
+    <!-- HEADER PERFIL -->
+    <div class="member-header">
+
+      <div class="member-avatar-big">
+        <img id="panelAvatar" src="" alt="avatar">
+      </div>
+
+      <h3 id="panelNome">NOME</h3>
+      <span id="panelCargoBadge" class="cargo-badge"></span>
+
+    </div>
+
+    <!-- INFORMAÇÕES -->
+    <div class="info-grid">
+      <p><b>Data de Entrada:</b> <span id="panelEntrada"></span></p>
+      <p><b>Promovido/Rebaixado:</b> <span id="panelPromocao"></span></p>
+      <p><b>Graduação Pendente:</b> <span id="panelPendente"></span></p>
+      <p><b>Subgrupo:</b> <span id="panelSubgrupo"></span></p>
+      <p><b>CE:</b> <span id="panelCE"></span></p>
+      <p><b>Advertência:</b> <span id="panelAdv"></span></p>
+      <p><b>Rebaixamento:</b> <span id="panelRebaixamento"></span></p>
+      <p><b>Início Licença:</b> <span id="panelLicencaInicio"></span></p>
+      <p><b>Dias Licença:</b> <span id="panelLicencaDias"></span></p>
+      <p><b>Término Licença:</b> <span id="panelLicencaFim"></span></p>
+    </div>
+
   </div>
 </div>
-</br>
 
 
 
@@ -139,6 +256,9 @@
 
 
 <script src="services/headerMenu.js"></script>
+<script src="services/painelMembros.js"></script>
+
+
 
 
 </body>
