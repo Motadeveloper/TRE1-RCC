@@ -107,9 +107,9 @@ function parseCSV(text) {
         ce: cols[8]?.replace(/"/g,"").trim(),
         adv: cols[9]?.replace(/"/g,"").trim(),
         r: cols[10]?.replace(/"/g,"").trim(),
-        licencaInicio: cols[11]?.replace(/"/g,"").trim(),
-        licencaDias: cols[12]?.replace(/"/g,"").trim(),
-        licencaFim: cols[13]?.replace(/"/g,"").trim()
+        licencaInicio: cols[13]?.replace(/"/g,"").trim(),
+        licencaDias: cols[14]?.replace(/"/g,"").trim(),
+        licencaFim: cols[15]?.replace(/"/g,"").trim()
       };
     })
     .filter(Boolean);
@@ -124,12 +124,23 @@ function setCampo(id, valor) {
   const el = document.getElementById(id);
   if (!el) return;
 
-  if (!valor) {
-    el.parentElement.style.display = "none";
+  const container = el.parentElement;
+
+  // considera vazio, false ou "false"
+  const vazio =
+    valor === null ||
+    valor === undefined ||
+    valor === "" ||
+    valor === false ||
+    String(valor).toLowerCase().trim() === "false";
+
+  if (vazio) {
+    container.style.display = "none";
+    el.textContent = "";
     return;
   }
 
-  el.parentElement.style.display = "block";
+  container.style.display = "block";
   el.textContent = valor;
 }
 
@@ -152,9 +163,11 @@ function openPanel(m) {
   setCampo("panelPromocao", m.promo);
 
   setCampo(
-    "panelPendente",
-    m.gp ? "Sim — Possui graduação pendente" : ""
-  );
+  "panelPendente",
+  String(m.gp).toLowerCase().trim() === "true"
+    ? " "
+    : ""
+);
 
   /* SUBGRUPO */
   let subgrupo = "";
@@ -166,7 +179,9 @@ function openPanel(m) {
 
   setCampo(
     "panelCE",
-    m.ce ? "Em Semana Especial" : ""
+    String(m.ce).toLowerCase().trim() === "true"
+    ? " "
+    : ""
   );
 
   /* ADV COM ALERTA */
@@ -182,9 +197,9 @@ function openPanel(m) {
   }
 
   setCampo(
-    "panelRebaixamento",
-    m.r ? "Rebaixado" : ""
-  );
+  "panelRebaixamento",
+  m.r ? "Rebaixado" : ""
+);
 
   setCampo("panelLicencaInicio", m.licencaInicio);
   setCampo("panelLicencaDias", m.licencaDias);
@@ -232,7 +247,7 @@ async function carregarMembros() {
       if (grupo) grupos[grupo].push(m);
     });
 
-    console.log("✅ Grupos:", grupos);
+    //console.log("✅ Grupos:", grupos);
 
     /* RENDER */
 

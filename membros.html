@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="assets/css/header.css">
 <link rel="stylesheet" href="assets/css/footer.css">
 <link rel="stylesheet" href="assets/css/painelmembros.css">
+<link rel="stylesheet" href="assets/css/infocss.css">
+
 </head>
 
 <div class="header">
@@ -153,16 +155,19 @@
 
     <!-- INFORMAÇÕES -->
     <div class="info-grid">
+      <p style="text-align: center;">Informações</p>
       <p><b>Data de Entrada:</b> <span id="panelEntrada"></span></p>
       <p><b>Promovido/Rebaixado:</b> <span id="panelPromocao"></span></p>
-      <p><b>Graduação Pendente:</b> <span id="panelPendente"></span></p>
-      <p><b>Subgrupo:</b> <span id="panelSubgrupo"></span></p>
-      <p><b>CE:</b> <span id="panelCE"></span></p>
+      <p class="pendente">Graduação pendente<span id="panelPendente"></span></p>
+      <p class="membro"><span id="panelSubgrupo"></span></p>
+      <p class="pendente">Semana especial <span id="panelCE"></span></p>
       <p><b>Advertência:</b> <span id="panelAdv"></span></p>
-      <p><b>Rebaixamento:</b> <span id="panelRebaixamento"></span></p>
-      <p><b>Início Licença:</b> <span id="panelLicencaInicio"></span></p>
-      <p><b>Dias Licença:</b> <span id="panelLicencaDias"></span></p>
-      <p><b>Término Licença:</b> <span id="panelLicencaFim"></span></p>
+      <p class="rebaixado"><span id="panelRebaixamento"></span></p>
+      <p class="licenca">
+        <span id="panelLicencaDias" class="dias"></span> dias de licença
+      </p>
+      <p><b>Início da Licença:</b> <span id="panelLicencaInicio"></span></p>
+      <p><b>Término da Licença:</b> <span id="panelLicencaFim"></span></p>
     </div>
 
   </div>

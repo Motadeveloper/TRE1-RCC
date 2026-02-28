@@ -1,0 +1,21 @@
+.pendente{
+     color: #ffc107;   
+     font-weight: bold;
+}
+
+.membro {
+    color:aqua;
+    font-weight: bold;
+
+}
+
+.rebaixado {
+    color:red;
+    font-weight: bold;
+}
+
+.licenca {
+    color: darkorange;
+    font-weight:bolder;
+    text-align: center;
+}
