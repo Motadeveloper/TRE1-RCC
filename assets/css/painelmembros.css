@@ -37,7 +37,7 @@
   right: 15px;
   top: 10px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 2em;
   color: #ff0000;
 }
 
@@ -93,6 +93,12 @@
   align-items: center;
   cursor: pointer;
   transition: transform .25s ease;
+}
+
+.habbo-cargo {
+  font-size: 0.75em;
+  margin-top: 10px;
+
 }
 
 .habbo-card:hover {
