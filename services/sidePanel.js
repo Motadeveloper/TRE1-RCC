@@ -86,11 +86,6 @@ async function carregarMembros() {
       else if (c === "tre.1") novos.push(nick);
     });
 
-    console.log("✅ Lider:", lider);
-    console.log("✅ Vices:", vices);
-    console.log("✅ Ministros:", ministros);
-    console.log("✅ TRE.1:", novos);
-
     /* RENDER */
 
     renderCards(
