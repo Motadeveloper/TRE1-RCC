@@ -159,14 +159,68 @@ body {
   left: 0;
   width: 320px;
   height: 100vh;
+
   background: linear-gradient(180deg, #2c0f18, #12060a);
   border-right: 1px solid var(--border);
   backdrop-filter: blur(12px);
+
   padding: 20px;
+
   transform: translateX(-320px);
   transition: transform 0.4s ease;
+
   z-index: 999;
+
+  /* ===== SCROLL ===== */
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #cc0000 #14070c;
+
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 4%,
+    black 96%,
+    transparent 100%
+  );
 }
+
+/* =========================
+   SCROLLBAR SIDEBAR
+========================= */
+
+.sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: #14070c;
+  border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    #ff1a1a,
+    #990000
+  );
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    #ff4040,
+    #ff0000
+  );
+}
+
+
 
 .sidebar.open {
   transform: translateX(0);
